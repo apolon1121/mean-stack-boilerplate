@@ -1,0 +1,15 @@
+<nav class="teal darken-2">
+  <div class="container">
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Mean Auth App</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/']">Home</a></li>
+        <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/login']">Login</a></li>
+        <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/register']">Register</a></li>
+        <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/dashboard']">Dashboard</a></li>
+        <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/profile']">Profile</a></li>
+        <li *ngIf="authService.loggedIn()"><a (click)="logoutClicked()">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

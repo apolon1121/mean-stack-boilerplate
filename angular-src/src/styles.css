@@ -1,0 +1,21 @@
+.default{
+	background: #00796B;
+}
+.alert-default{
+	background: #00796B;
+	color: #eee;
+	padding: 5px 20px;
+	margin: 10px 0;
+}
+.alert-success{
+	background: #0079fB;
+	color: #eee;
+	padding: 5px 20px;
+	margin: 10px 0;
+}
+.alert-danger{
+	background: #f22;
+	color: #eee;
+	padding: 5px 20px;
+	margin: 10px 0;
+}

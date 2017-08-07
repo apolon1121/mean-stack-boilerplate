@@ -1,0 +1,27 @@
+<div>
+  <h3>Register</h3>
+
+  <form (submit)="onRegisterSubmit()">
+    <div class="input-field">
+      <input type="text" [(ngModel)]="name" id="name" name="name">
+      <label for="name">Name</label>
+    </div>
+    <div class="input-field">
+      <input type="email" [(ngModel)]="email" id="email" name="email">
+      <label for="email">Email</label>
+    </div>
+    <div class="input-field">
+      <input type="text" [(ngModel)]="username" id="username" name="username">
+      <label for="username">Username</label>
+    </div>
+    <div class="input-field">
+      <input type="password" [(ngModel)]="password" id="password" name="password">
+      <label for="password">Password</label>
+    </div>
+    <div class="input-field">
+
+      <button type="submit" class="btn waves-effect waves-light default">Submit</button>
+
+    </div>
+  </form>
+</div>
