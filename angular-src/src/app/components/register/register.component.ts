@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   name: String;
-  username: String;
   email: String;
   password: String;
 
@@ -29,7 +28,6 @@ export class RegisterComponent implements OnInit {
   onRegisterSubmit() {
     const user = {
       name: this.name,
-      username: this.username,
       email: this.email,
       password: this.password
     }
@@ -38,22 +36,22 @@ export class RegisterComponent implements OnInit {
 
     // Required Fields
     if (!this.validateService.validateRegister(user)) {
-      this.flashMessage.show('Please fill in all fields!', { cssClass: 'alert-danger', timeout: 3000 });
+      this.flashMessage.show('Please fill in all fields!', { cssClass: 'alert alert-danger', timeout: 3000 });
       return false;
     }
 
     if (!this.validateService.validateEmail(user.email)) {
-      this.flashMessage.show('Invalid Email!', { cssClass: 'alert-danger', timeout: 3000 });
+      this.flashMessage.show('Invalid Email!', { cssClass: 'alert alert-danger', timeout: 3000 });
       return false;
     }
 
     // Register User
     this.authService.registerUser(user).subscribe(data => {
       if (data.success) {
-        this.flashMessage.show('You are now registered and can login!', { cssClass: 'alert-success', timeout: 3000 });
+        this.flashMessage.show('You are now registered and can login!', { cssClass: 'alert alert-success', timeout: 3000 });
         this.router.navigate(['/login']);
       } else {
-        this.flashMessage.show('Something went wrong!', { cssClass: 'alert-danger', timeout: 3000 });
+        this.flashMessage.show('Something went wrong!', { cssClass: 'alert alert-danger', timeout: 3000 });
         this.router.navigate(['/register']);
       }
     });

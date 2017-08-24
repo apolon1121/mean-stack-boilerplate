@@ -12,27 +12,36 @@ const UserSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
-	username: {
-		type: String,
-		required: true
-	},
 	password: {
 		type: String,
 		required: true
+	},
+	created_at: {
+		type: Date,
+		required: true,
+		default: Date.now
 	}
 });
 
 
 const User = module.exports = mongoose.model('User', UserSchema);
 
+// Get user by ID
 module.exports.getUserById = function (id, callback) {
 	User.findById(id, callback);
 }
 
-module.exports.getUserByUsername = function (username, callback) {
-	const query = { username: username }
+// Get user by Email
+module.exports.getUserByEmail = function (email, callback) {
+	const query = { email: email }
 	User.findOne(query, callback);
 }
+
+// Get user details without password
+module.exports.getUserByIdProtected = function (id, callback) {
+	User.findById(id).select('-password').exec(callback);
+}
+
 
 module.exports.addUser = function (newUser, callback) {
 	bcrypt.genSalt(10, function (err, salt) {
@@ -50,4 +59,9 @@ module.exports.comparePassword = function (password, actualPassword, callback) {
 		if (err) throw err;
 		callback(null, isMatch);
 	});
+}
+
+// Change Profile
+module.exports.editUser = function (id, newUser, callback) {
+	User.findByIdAndUpdate(id, newUser, callback);
 }

@@ -34,10 +34,24 @@ export class AuthService {
       .map(res => res.json());
   }
 
+  changeProfile(user) {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.put('http://localhost:3000/users/edit', { user: user }, { headers: headers })
+      .map(res => res.json());
+  }
+
   storeUserData(token, user) {
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
     this.authToken = token;
+    this.user = user;
+  }
+
+  updateUserData(user) {
+    localStorage.setItem('user', JSON.stringify(user));
     this.user = user;
   }
 
@@ -48,6 +62,15 @@ export class AuthService {
 
   loggedIn() {
     return tokenNotExpired();
+  }
+
+  myId() {
+    let user: Object;
+    user = JSON.parse(localStorage.getItem('user'));
+    if (user != null) {
+      return user['id'];
+    }
+    return false;
   }
 
   logout() {

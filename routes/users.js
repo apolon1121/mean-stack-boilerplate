@@ -13,7 +13,6 @@ router.post('/register', (req, res, next) => {
 	let newUser = new User({
 		name: req.body.name,
 		email: req.body.email,
-		username: req.body.username,
 		password: req.body.password
 	});
 
@@ -28,10 +27,10 @@ router.post('/register', (req, res, next) => {
 });
 
 router.post('/authenticate', (req, res, next) => {
-	const username = req.body.username;
+	const email = req.body.email;
 	const password = req.body.password;
 
-	User.getUserByUsername(username, (err, user) => {
+	User.getUserByEmail(email, (err, user) => {
 		if (err) throw err;
 		if (!user) {
 			return res.json({ "success": false, "message": "User not found" });
@@ -51,7 +50,6 @@ router.post('/authenticate', (req, res, next) => {
 					user: {
 						id: user._id,
 						name: user.name,
-						username: user.username,
 						email: user.email
 					}
 				})
@@ -68,5 +66,22 @@ router.get('/profile', passport.authenticate('jwt', { session: false }), (req, r
 	res.json({ user: req.user });
 });
 
+// Change Profile data
+router.put('/edit', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+	User.editUser(req.body.user._id, req.body.user, (err, user) => {
+		console.log(user);
+		if (err) {
+			res.json({
+				status: false,
+				message: 'There was some error. ' + err
+			});
+		} else {
+			res.json({
+				status: true,
+				user: user
+			});
+		}
+	});
+});
 
 module.exports = router;

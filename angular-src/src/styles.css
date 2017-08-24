@@ -1,21 +1,33 @@
+body{
+	background: #e5e5ef;
+}
 .default{
 	background: #00796B;
 }
-.alert-default{
-	background: #00796B;
+
+.block{
+	width: 100%;
+}
+
+.line-breaker{
+	white-space: pre-line;
+}
+.justify-align{
+	text-align: justify;
+}
+.alert{
+	position: fixed;
+	right: 0;
+	width: 300px;
 	color: #eee;
 	padding: 5px 20px;
 	margin: 10px 0;
+	z-index: 9999;
+	background: #00796B;
 }
 .alert-success{
 	background: #0079fB;
-	color: #eee;
-	padding: 5px 20px;
-	margin: 10px 0;
 }
 .alert-danger{
 	background: #f22;
-	color: #eee;
-	padding: 5px 20px;
-	margin: 10px 0;
 }
